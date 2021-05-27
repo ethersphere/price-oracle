@@ -8,7 +8,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   await deploy("PriceOracle", {
     from: deployer,
-    args: [],
+    args: [100, 200],
     log: true,
   });
 };

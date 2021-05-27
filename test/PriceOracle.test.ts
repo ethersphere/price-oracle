@@ -27,6 +27,16 @@ describe("PriceOracle", function () {
       const priceOracle = await ethers.getContract("PriceOracle");
       expect(priceOracle.address).to.be.properAddress;
     });
+
+    it("should set the initial price", async function () {
+      const priceOracle = await ethers.getContract("PriceOracle");
+      expect(await priceOracle.price()).to.equal(100);
+    });
+
+    it("should set the initial chequeValueDeduction", async function () {
+      const priceOracle = await ethers.getContract("PriceOracle");
+      expect(await priceOracle.chequeValueDeduction()).to.equal(200);
+    });
   });
 
   describe("with deployed contract", function () {

@@ -22,6 +22,11 @@ contract PriceOracle is Ownable {
     // value deducted from first received cheque from a peer in PLUR
     uint256 public chequeValueDeduction;
 
+    constructor(uint256 _price, uint256 _chequeValueDeduction) {
+        price = _price;
+        chequeValueDeduction = _chequeValueDeduction;
+    }
+
     /**
      * @notice Returns the current price in PLUR per accounting unit and the current cheque value deduction amount.
      */
