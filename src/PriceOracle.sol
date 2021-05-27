@@ -19,7 +19,7 @@ contract PriceOracle is Ownable {
 
     // current price in PLUR per accounting unit
     uint256 public price;
-    // value deducted from first received cheque from a peer in PLUR per accounting unit
+    // value deducted from first received cheque from a peer in PLUR
     uint256 public chequeValueDeduction;
 
     /**
