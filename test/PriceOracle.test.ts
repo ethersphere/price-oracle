@@ -95,5 +95,23 @@ describe("PriceOracle", function () {
         });
       });
     });
+
+    describe("when getting the price", function () {
+      beforeEach(async function () {
+        await deployments.fixture();
+        this.priceOracle = await ethers.getContract("PriceOracle", deployer);
+      });
+
+      it("should get both values", async function () {
+        const price = 100;
+        const chequeValueDeduction = 200;
+        await this.priceOracle.updatePrice(price);
+        await this.priceOracle.updateChequeValueDeduction(chequeValueDeduction);
+
+        const values = await this.priceOracle.getPrice();
+        expect(values[0]).to.equal(price);
+        expect(values[1]).to.equal(chequeValueDeduction);
+      });
+    });
   });
 });
