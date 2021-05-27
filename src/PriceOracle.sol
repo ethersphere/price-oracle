@@ -3,6 +3,9 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PriceOracle is Ownable {
+    event PriceUpdate(uint256 price);
+    event ChequeValueDeductionUpdate(uint256 chequeValueDeduction);
+
     uint256 public price;
     uint256 public chequeValueDeduction;
 
@@ -12,6 +15,7 @@ contract PriceOracle is Ownable {
 
     function updatePrice(uint256 newPrice) external onlyOwner {
         price = newPrice;
+        emit PriceUpdate(price);
     }
 
     function updateChequeValueDeduction(uint256 newChequeValueDeduction)
@@ -19,5 +23,6 @@ contract PriceOracle is Ownable {
         onlyOwner
     {
         chequeValueDeduction = newChequeValueDeduction;
+        emit ChequeValueDeductionUpdate(price);
     }
 }
