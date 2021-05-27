@@ -19,11 +19,11 @@ contract PriceOracle is Ownable {
 
     // current price in PLUR per accounting unit
     uint256 public price;
-    // value deducted from first received cheque in PLUR per accounting unit
+    // value deducted from first received cheque from a peer in PLUR per accounting unit
     uint256 public chequeValueDeduction;
 
     /**
-     * @notice Returns the current price in PLUR per accounting unit
+     * @notice Returns the current price in PLUR per accounting unit and the current cheque value deduction amount.
      */
     function getPrice() external view returns (uint256, uint256) {
         return (price, chequeValueDeduction);
