@@ -39,22 +39,22 @@ describe('PriceOracle', function () {
   describe('with deployed contract', function () {
     beforeEach(async function () {
       await deployments.fixture();
-      this.priceOracle = await ethers.getContract('PriceOracle', deployer);
+      priceOracle = await ethers.getContract('PriceOracle', deployer);
     });
 
     describe('when updating the price', function () {
       describe('when called by owner', function () {
         it('should emit the PriceUpdate event', async function () {
           const newPrice = 100;
-          await expect(this.priceOracle.updatePrice(newPrice))
-            .to.emit(this.priceOracle, 'PriceUpdate')
+          await expect(priceOracle.updatePrice(newPrice))
+            .to.emit(priceOracle, 'PriceUpdate')
             .withArgs(newPrice);
         });
 
         it('should update the price', async function () {
           const newPrice = 100;
-          await this.priceOracle.updatePrice(newPrice);
-          expect(await this.priceOracle.price()).to.equal(newPrice);
+          await priceOracle.updatePrice(newPrice);
+          expect(await priceOracle.price()).to.equal(newPrice);
         });
       });
 
@@ -71,15 +71,15 @@ describe('PriceOracle', function () {
       describe('when called by owner', function () {
         it('should emit the ChequeValueDeductionUpdate event', async function () {
           const newValue = 100;
-          await expect(this.priceOracle.updateChequeValueDeduction(newValue))
-            .to.emit(this.priceOracle, 'ChequeValueDeductionUpdate')
+          await expect(priceOracle.updateChequeValueDeduction(newValue))
+            .to.emit(priceOracle, 'ChequeValueDeductionUpdate')
             .withArgs(newValue);
         });
 
         it('should update the chequeValueDeduction', async function () {
           const newValue = 100;
-          await this.priceOracle.updateChequeValueDeduction(newValue);
-          expect(await this.priceOracle.chequeValueDeduction()).to.equal(newValue);
+          await priceOracle.updateChequeValueDeduction(newValue);
+          expect(await priceOracle.chequeValueDeduction()).to.equal(newValue);
         });
       });
 
@@ -96,16 +96,16 @@ describe('PriceOracle', function () {
     describe('when getting the price', function () {
       beforeEach(async function () {
         await deployments.fixture();
-        this.priceOracle = await ethers.getContract('PriceOracle', deployer);
+        priceOracle = await ethers.getContract('PriceOracle', deployer);
       });
 
       it('should get both values', async function () {
         const price = 100;
         const chequeValueDeduction = 200;
-        await this.priceOracle.updatePrice(price);
-        await this.priceOracle.updateChequeValueDeduction(chequeValueDeduction);
+        await priceOracle.updatePrice(price);
+        await priceOracle.updateChequeValueDeduction(chequeValueDeduction);
 
-        const values = await this.priceOracle.getPrice();
+        const values = await priceOracle.getPrice();
         expect(values[0]).to.equal(price);
         expect(values[1]).to.equal(chequeValueDeduction);
       });
