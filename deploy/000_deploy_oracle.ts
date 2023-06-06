@@ -9,7 +9,8 @@ const func: DeployFunction = async function ({ deployments, getNamedAccounts, ne
   const waitBlockConfirmations = liveNetworks.includes(network.name) ? 6 : 1;
 
   log('----------------------------------------------------');
-  const args = [100, 200];
+  const args = liveNetworks.includes(network.name) ? [100000, 100] : [100, 200];
+
   const oracle = await deploy('PriceOracle', {
     from: deployer,
     args: args,

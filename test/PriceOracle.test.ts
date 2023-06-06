@@ -46,9 +46,7 @@ describe('PriceOracle', function () {
       describe('when called by owner', function () {
         it('should emit the PriceUpdate event', async function () {
           const newPrice = 100;
-          await expect(priceOracle.updatePrice(newPrice))
-            .to.emit(priceOracle, 'PriceUpdate')
-            .withArgs(newPrice);
+          await expect(priceOracle.updatePrice(newPrice)).to.emit(priceOracle, 'PriceUpdate').withArgs(newPrice);
         });
 
         it('should update the price', async function () {
