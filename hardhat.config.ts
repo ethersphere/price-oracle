@@ -3,17 +3,31 @@ import { HardhatUserConfig } from "hardhat/types";
 import "solidity-coverage";
 import "hardhat-deploy";
 import "hardhat-deploy-ethers";
+import "hardhat-tracer";
+import "@nomiclabs/hardhat-etherscan";
+import "hardhat-contract-sizer";
 
-// Define mnemonic for accounts.
-let mnemonic = process.env.MNEMONIC;
-if (!mnemonic) {
-  // NOTE: this fallback is for development only!
-  // When using other networks, set the secret in .env.
-  // DO NOT commit or share your mnemonic with others!
-  mnemonic = "test test test test test test test test test test test test";
+// Set Private RPCs if added, otherwise use Public that are hardcoded in this config
+
+const PRIVATE_RPC_MAINNET = !process.env.PRIVATE_RPC_MAINNET
+  ? undefined
+  : process.env.PRIVATE_RPC_MAINNET;
+const PRIVATE_RPC_TESTNET = !process.env.PRIVATE_RPC_TESTNET
+  ? undefined
+  : process.env.PRIVATE_RPC_TESTNET;
+
+const walletSecret =
+  process.env.WALLET_SECRET === undefined
+    ? "undefined"
+    : process.env.WALLET_SECRET;
+if (walletSecret === "undefined") {
+  console.log("Please set your WALLET_SECRET in a .env file");
 }
+const accounts =
+  walletSecret.length === 64 ? [walletSecret] : { mnemonic: walletSecret };
 
-const accounts = { mnemonic };
+const mainnetEtherscanKey = process.env.MAINNET_ETHERSCAN_KEY;
+const testnetEtherscanKey = process.env.TESTNET_ETHERSCAN_KEY;
 
 // Config for hardhat.
 const config: HardhatUserConfig = {
@@ -26,21 +40,51 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  namedAccounts: {
-    deployer: 0,
-  },
+  defaultNetwork: "hardhat",
   networks: {
-    hardhat: {
-      accounts,
-    },
+    hardhat: {},
     localhost: {
       url: "http://localhost:8545",
-      accounts,
+      chainId: 31337,
     },
-    staging: {
-      url: "https://goerli.infura.io/v3/" + process.env.INFURA_TOKEN,
+    testnet: {
+      url: PRIVATE_RPC_TESTNET
+        ? PRIVATE_RPC_TESTNET
+        : "https://rpc2.sepolia.org",
       accounts,
+      chainId: 11155111,
     },
+    mainnet: {
+      url: PRIVATE_RPC_MAINNET
+        ? PRIVATE_RPC_MAINNET
+        : "https://rpc.gnosischain.com",
+      accounts,
+      chainId: 100,
+    },
+  },
+  etherscan: {
+    apiKey: {
+      mainnet: mainnetEtherscanKey || "",
+      testnet: testnetEtherscanKey || "",
+    },
+    customChains: [
+      {
+        network: "testnet",
+        chainId: 11155111,
+        urls: {
+          apiURL: "https://api-sepolia.etherscan.io/api",
+          browserURL: "https://sepolia.etherscan.io/address/",
+        },
+      },
+      {
+        network: "mainnet",
+        chainId: 100,
+        urls: {
+          apiURL: "https://api.gnosisscan.io/",
+          browserURL: "https://gnosisscan.io/address/",
+        },
+      },
+    ],
   },
   paths: {
     sources: "src",
