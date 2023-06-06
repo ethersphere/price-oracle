@@ -45,6 +45,9 @@
     "lint": "eslint \"**/*.{js,ts}\"",
     "lint:fix": "eslint --fix \"**/*.{js,ts}\"",
     "format": "prettier --write \"**/*.{ts,js,sol}\"",
-    "hardhat": "hardhat"
+    "hardhat": "hardhat",
+    "coverage": "hardhat coverage",
+    "compile": "hardhat compile",
+    "test": "hardhat test"
   }
 }
