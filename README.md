@@ -28,3 +28,5 @@ Hardhat is configured to deploy all contracts to the testing hardhat devchain an
 ## Go-bindings
 
 The go bindings are automatically generated on every release git tag and the pushed to the [ethersphere/go-price-oracle-abi](https://github.com/ethersphere/go-price-oracle-abi) repository.
+
+To release a new stable version do the following. For example, to release v0.2.0, execute the following command: git tag v0.4.0 && git push origin v0.2.0.
