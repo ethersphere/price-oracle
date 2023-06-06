@@ -1,5 +1,6 @@
 import { expect } from './util/chai';
 import { ethers, deployments, getNamedAccounts, getUnnamedAccounts } from 'hardhat';
+import { Contract } from 'ethers';
 
 // Named accounts used by tests.
 let deployer: string;
@@ -13,23 +14,24 @@ before(async function () {
 });
 
 describe('PriceOracle', function () {
+  let priceOracle: Contract;
   describe('when deploying contract', function () {
     beforeEach(async function () {
       await deployments.fixture();
     });
 
     it('should deploy PriceOracle', async function () {
-      const priceOracle = await ethers.getContract('PriceOracle');
+      priceOracle = await ethers.getContract('PriceOracle');
       expect(priceOracle.address).to.be.properAddress;
     });
 
     it('should set the initial price', async function () {
-      const priceOracle = await ethers.getContract('PriceOracle');
+      priceOracle = await ethers.getContract('PriceOracle');
       expect(await priceOracle.price()).to.equal(100);
     });
 
     it('should set the initial chequeValueDeduction', async function () {
-      const priceOracle = await ethers.getContract('PriceOracle');
+      priceOracle = await ethers.getContract('PriceOracle');
       expect(await priceOracle.chequeValueDeduction()).to.equal(200);
     });
   });
