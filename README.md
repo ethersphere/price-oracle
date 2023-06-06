@@ -24,3 +24,7 @@ Hardhat is configured to deploy all contracts to the testing hardhat devchain an
 | XDai    | [0x0FDc5429C50e2a39066D8A94F3e2D2476fcc3b85](https://blockscout.com/xdai/mainnet/address/0x0FDc5429C50e2a39066D8A94F3e2D2476fcc3b85/transactions) |
 | Sepolia | [0xB6BCF2dCB0b9eDBD3035F3e0C369D55c4F392A49](https://sepolia.etherscan.io/address/0xB6BCF2dCB0b9eDBD3035F3e0C369D55c4F392A49#code)                |
 | Goerli  | [0x0c9dE531dCB38B758fe8A2c163444a5e54ee0db2](https://goerli.etherscan.io/address/0x0c9dE531dCB38B758fe8A2c163444a5e54ee0db2)                      |
+
+## Go-bindings
+
+The go bindings are automatically generated on every release git tag and the pushed to the [ethersphere/go-price-oracle-abi](https://github.com/ethersphere/go-price-oracle-abi) repository.
