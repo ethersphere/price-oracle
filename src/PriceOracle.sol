@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BSD-3-Clause
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
@@ -47,10 +47,7 @@ contract PriceOracle is Ownable {
      * @notice Update the cheque value deduction amount. Can only be called by the owner.
      * @param newChequeValueDeduction the new cheque value deduction amount
      */
-    function updateChequeValueDeduction(uint256 newChequeValueDeduction)
-        external
-        onlyOwner
-    {
+    function updateChequeValueDeduction(uint256 newChequeValueDeduction) external onlyOwner {
         chequeValueDeduction = newChequeValueDeduction;
         emit ChequeValueDeductionUpdate(chequeValueDeduction);
     }
