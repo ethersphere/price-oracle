@@ -22,7 +22,7 @@ const testnetEtherscanKey = process.env.TESTNET_ETHERSCAN_KEY;
 // Config for hardhat.
 const config: HardhatUserConfig = {
   solidity: {
-    version: '0.8.4',
+    version: '0.8.19',
     settings: {
       optimizer: {
         enabled: true,
@@ -38,7 +38,7 @@ const config: HardhatUserConfig = {
       chainId: 31337,
     },
     testnet: {
-      url: PRIVATE_RPC_TESTNET ? PRIVATE_RPC_TESTNET : 'https://rpc2.sepolia.org',
+      url: PRIVATE_RPC_TESTNET ? PRIVATE_RPC_TESTNET : 'https://1rpc.io/sepolia',
       accounts,
       chainId: 11155111,
     },
