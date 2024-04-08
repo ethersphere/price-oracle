@@ -1,3 +1,6 @@
+# Repo is archived
+The code has been merged with this repo for which oracle is used in the first place https://github.com/ethersphere/swap-swear-and-swindle  
+
 # price-oracle
 
 This repo contains the contracts and tests for the swarm price orace.
